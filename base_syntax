@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define speed() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define int long long
+const int M=1e9+7;
+int a[M];
+void kp(){
+    int x;
+    cin>>x;
+    int cnt=0,res=0; 
+    for(int i=1;i<=x;i++){
+     cin>>res;
+    }
+    cout<<cnt<<'\n';
+}
+int32_t main()
+{
+    speed();
+    int t;cin>>t;
+    while(t--){
+        kp();
+    }
+    return 0;
+}
+
