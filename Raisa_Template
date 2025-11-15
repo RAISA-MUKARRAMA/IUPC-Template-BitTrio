@@ -1,0 +1,194 @@
+Subarray: consecutive ordered elements of an array
+Subsequence: consecutive or nonconsecutive ordered elements of an array
+
+// optimal for array with negative elements, better for array with non-negative elements
+int getLongestSubarray(vector<int>& a, long long k) {
+    int n = a.size(); // size of the array.
+
+    map<long long, int> preSumMap;
+    long long sum = 0;
+    int maxLen = 0;
+    for (int i = 0; i < n; i++) {
+        //calculate the prefix sum till index i:
+        sum += a[i];
+
+        // if the sum = k, update the maxLen:
+        if (sum == k) {
+            maxLen = max(maxLen, i + 1);
+        }
+
+        // calculate the sum of remaining part i.e. x-k:
+        long long rem = sum - k;
+
+        //Calculate the length and update maxLen:
+        if (preSumMap.find(rem) != preSumMap.end()) {
+            int len = i - preSumMap[rem];
+            maxLen = max(maxLen, len);
+        }
+
+        //Finally, update the map checking the conditions:
+        if (preSumMap.find(sum) == preSumMap.end()) {
+            preSumMap[sum] = i;
+        }
+    }
+
+    return maxLen;
+}
+
+// optimal for array with non-negative elements
+int getLongestSubarray(vector<int>& a, long long k) {
+    int n = a.size(); // size of the array.
+
+    int left = 0, right = 0; // 2 pointers
+    long long sum = a[0];
+    int maxLen = 0;
+    while (right < n) {
+        // if sum > k, reduce the subarray from left
+        // until sum becomes less or equal to k:
+        while (left <= right && sum > k) {
+            sum -= a[left];
+            left++;
+        }
+
+        // if sum = k, update the maxLen, i.e., answer:
+        if (sum == k) {
+            maxLen = max(maxLen, right - left + 1);
+        }
+
+        // Move forward the right pointer:
+        right++;
+        if (right < n) sum += a[right];
+    }
+
+    return maxLen;
+}
+
+
+
+
+
+Taking input
+1. Adjacency list
+
+int n, m;
+cin >> n >> m;
+
+vector<vector<int>> adj(n + 1);
+
+for (int i = 0; i < m; i++) {
+    int u, v;
+    cin >> u >> v;
+    adj[u].push_back(v);
+    adj[v].push_back(u); // remove if directed
+}
+
+
+2. Adjacency matrix
+
+int n;
+cin >> n;
+
+vector<vector<int>> mat(n, vector<int>(n));
+
+for (int i = 0; i < n; i++)
+    for (int j = 0; j < n; j++)
+        cin >> mat[i][j];
+
+
+3. Edge List
+
+int n, m;
+cin >> n >> m;
+
+vector<tuple<int,int,int>> edges;
+
+for (int i = 0; i < m; i++) {
+    int u, v, w;
+    cin >> u >> v >> w;
+    edges.emplace_back(u, v, w);
+}
+
+
+
+
+4. Implicit Graph (grid graphs)
+
+int n, m;
+cin >> n >> m;
+
+vector<string> grid(n);
+for (int i = 0; i < n; i++)
+    cin >> grid[i];
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#ifdef LOCAL
+#include "algo/debug.h"
+#else
+#define debug(...) 42
+#endif
+#define ll long long
+#define llm LONG_LONG_MAX
+
+void solve()
+{
+}
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  ll tt,cse=1;
+  cin >> tt;
+  while (tt--) {
+    //cout<< "Case " << cse << ": ";
+    //cse++;
+    solve();
+  }
+  return 0;
+}
+
+
+
+
+next_permutation(begin, end);//just next 
+
+__builtin_popcount(int num);
+
+sort(begin, end)
+sort(arr, arr+3, greater<int>())
+bool sortbysec(const pair<int,int> &a,const pair<int,int> &b) 
+{ 
+    return (a.second < b.second); 
+}
+
+
+
+int cnt = (int)(log10(n)+1);
+
+Repeatedly subtract the smaller number from the larger number until one of them becomes 0.
+Once one of them becomes 0, the other number is the GCD of the original numbers.and this is also similar to taking remainder until 0.
+
+int findGcd(int a, int b) {
+    while(a > 0 && b > 0) {
+        if(a > b) {
+            a = a % b;
+        }
+        else {
+            b = b % a; 
+        }
+    }
+    if(a == 0) {
+        return b;
+    }
+    return a;
+}
+
+
+
+
+
+
+
