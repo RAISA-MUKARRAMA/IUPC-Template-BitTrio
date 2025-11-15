@@ -49,6 +49,8 @@ if (arr[low] < ans) {
 lowest ta ber kore delete.
 
 
+
+
 The lower bound algorithm finds the first or the smallest index in a sorted array where the value at that index is greater than or equal to a given key. directly gives ceil.
 int lowerBound(vector<int> arr, int n, int x) {
     int low = 0, high = n - 1;
@@ -69,6 +71,9 @@ int lowerBound(vector<int> arr, int n, int x) {
     return ans;
 }
 
+
+
+
 //to get floor it will be index-1 for upper bound
 int upperBound(vector<int> &arr, int x, int n) {
     int low = 0, high = n - 1;
@@ -88,3 +93,38 @@ int upperBound(vector<int> &arr, int x, int n) {
     }
     return ans;
 }
+
+
+
+
+
+#include<bits/stdc++.h>
+bool canWePlace (vector<int> &stalls, int dist, int cows){
+int cntCows = 1, last=stalls[0];
+for (int i = 1; i<stalls.size();i++) {
+    if(stalls[i] - last >= dist)  {
+    cntCows++;
+    last stalls[i];
+    }
+if(cntCows >= cows) return true;
+}
+return false;
+}
+int aggressiveCows (vector<int> &stalls, int k)
+{
+    sort(stalls.begin(), stalls.end());
+    int n=stalls.size();
+    int low=1, high=stalls[n-1] - stalls[0];
+    
+    while(low <= high) {
+        int mid = (low + high) / / 2;
+        if(canWePlace (stalls, mid, k) == true) {
+            low = mid+ 1;
+        }
+        else {
+                high=mid-1;
+        }
+        
+    }
+        return high;
+    }
