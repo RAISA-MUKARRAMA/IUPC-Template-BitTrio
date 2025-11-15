@@ -1,58 +1,90 @@
-int rotated_search(vector<int>& nums, int target)
-    {
-        int left=0, right=nums.size()-1;
-        int mid;
-        while(left<=right)
-        {
-            mid = (left+right)/2;
-            if(nums[mid]>=nums[left] )
-            {
-               
-                if(target>=nums[left] && target<=nums[mid])//sorted
-                {
-                    right=mid;
-                    mid=(right+left)/2;
-               
-                    if(nums[mid]<target)
-                    {
-                        left=mid+1;
-                    }
-                    else if (nums[mid]>target)
-                    {
-                        right=mid-1;
-                    }
-                    else
-                        return mid;
-               
-                }
-                else{left=mid+1;}
-           
+    int Rotated_search(vector<int>& nums, int target) {
+        int left = 0, right = nums.size() - 1;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+
+            if (nums[mid] == target) return mid;
+
+            // Handle duplicates
+            if (nums[left] == nums[mid] && nums[mid] == nums[right]) {
+                left++;
+                right--;
+                continue;
             }
-            else
-            {
-                if(target>=nums[mid] && target<=nums[right])//sorted
-                {
-                    left=mid;
-                    mid=(right+left)/2;
-               
-                    if(nums[mid]<target)
-                    {
-                        left=mid+1;
-                    }
-                    else if (nums[mid]>target)
-                    {
-                        right=mid-1;
-                    }
-                    else
-                        return mid;
-               
+
+            // Left side is sorted
+            if (nums[left] <= nums[mid]) {
+                if (nums[left] <= target && target <= nums[mid]) {
+                    right = mid - 1;
                 }
-                else{right=mid-1;}
+                else {
+                    left = mid + 1;
+                }
             }
-           
+            // Right side is sorted
+            else {
+                if (nums[mid] <= target && target <= nums[right]) {
+                    left = mid + 1;
+                }
+                else {
+                    right = mid - 1;
+                }
+            }
         }
+
         return -1;
-       
     }
 
+jodi bole koto position kore sorted then 
+if (arr[low] < ans) {
+                index = low;
+                ans = arr[low];
+            }
 
+            // Eliminate left half:
+            low = mid + 1;
+        }
+
+lowest ta ber kore delete.
+
+
+The lower bound algorithm finds the first or the smallest index in a sorted array where the value at that index is greater than or equal to a given key. directly gives ceil.
+int lowerBound(vector<int> arr, int n, int x) {
+    int low = 0, high = n - 1;
+    int ans = n;
+
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        // maybe an answer
+        if (arr[mid] >= x) {
+            ans = mid;
+            //look for smaller index on the left equal o hote pare
+            high = mid - 1;
+        }
+        else {
+            low = mid + 1; // look on the right
+        }
+    }
+    return ans;
+}
+
+//to get floor it will be index-1 for upper bound
+int upperBound(vector<int> &arr, int x, int n) {
+    int low = 0, high = n - 1;
+    int ans = n;
+
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        // maybe an answer
+        if (arr[mid] > x) {
+            ans = mid;
+            //look for smaller index on the left equal hobe na
+            high = mid - 1;
+        }
+        else {
+            low = mid + 1; // look on the right
+        }
+    }
+    return ans;
+}
