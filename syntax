@@ -1,0 +1,90 @@
+  unordered_set < int > s;
+  s.insert(i);
+
+ for (auto it = s.begin(); it != s.end(); it++) {
+    cout << * it << " ";
+  }
+  if (s.find(2) != s.end())
+    cout << n << " is present in unordered set" << endl;
+distance(v.begin(), it)
+  s.erase(s.begin()); //single element or range
+  s.size()
+ s.empty() == false //boolean
+  s.clear();
+
+
+ 
+vector:
+vector<int> arr = {5, 3, 3, 4, 1};
+v.insert(v.begin(), 5);//position,value
+*min_element(v.begin(),v.end())
+
+
+count() – gives the count of a particular element in the multiset.
+multiset<int> s;// multiple Same element
+
+
+
+Map:
+mp.insert({1,10});
+for (auto it = mp.begin(); it != mp.end(); it++) {
+    cout << it -> first  << it -> second << endl;
+  }
+ multimap<string, int> marks;
+
+    marks.insert({"Alice", 85});
+    marks.insert({"Bob", 90});
+    marks.insert({"Alice", 92});
+
+
+
+
+Stack,queue;
+q.push(v);
+deque.push_front(v); dq.push_back(v);
+
+Max,min pq:
+priority_queue<int> pq;
+priority_queue<int,vector<int>,greater<int>> pq;
+
+
+
+
+Merge sort + inversion sort:
+void or long long merge(vector<int>& arr, int low, int mid, int high) {
+        vector<int> temp;
+        int left = low, right = mid + 1; long long invCount = 0; // count of inversions
+        while (left <= mid && right <= high) {
+            if (arr[left] <= arr[right]) temp.push_back(arr[left++]);
+            else { temp.push_back(arr[right++]); 
+invCount += (mid - left + 1);
+ }
+       }
+        while (left <= mid) temp.push_back(arr[left++]);
+        while (right <= high) temp.push_back(arr[right++]);
+        for (int i = low; i <= high; i++) arr[i] = temp[i - low]; 
+return invCount;
+    }
+    void or long long mergeSort(vector<int>& arr, int low, int high) {
+        if (low >= high)  return 0;
+        int mid = (low + high) / 2;  long long invCount = 0;
+        invCount +=mergeSort(arr, low, mid);
+        invCount +=mergeSort(arr, mid + 1, high);
+        invCount +=merge(arr, low, mid, high);
+       return invCount;
+    }
+
+
+
+
+
+next_permutation(begin, end);//just next 
+
+__builtin_popcount(int num);
+
+sort(begin, end)
+sort(arr, arr+3, greater<int>())
+bool sortbysec(const pair<int,int> &a,const pair<int,int> &b) 
+{ 
+    return (a.second < b.second); 
+}
